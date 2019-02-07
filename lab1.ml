@@ -225,9 +225,11 @@ to the function.
 ......................................................................*)
 
 let say_hello (name : string) : string =
-  "Hi " ^ name ^ ". How are you today?";;
+  if name = "Gabby" then "Hi " ^ name ^ ". Welcome home! How are you today?"
+  else if name = "gabby" then "Hi " ^ name ^ ". Welcome home! How are you today?"
+  else "Hi " ^ name ^ ". How are you today?";;
 
-let exercise8 = say_hello("Sherry");;
+let exercise8 = say_hello("gabby");;
 
 (*......................................................................
 Exercise 9: Define a function, small_bills, that determines, given a
@@ -284,7 +286,7 @@ let computus_month (year : int) : int =
   let i= c / 4 in
   let k = c mod 4 in
   let l = (32 + 2 * e + 2 * i - h - k) mod 7 in
-  let m = (a + 11 * h + 22 * l) / 45 * l in
+  let m = (a + 11 * h + 22 * l) / 451 in
   let calcmonth month = (h + l - 7 * m + 114) / 31 in
   calcmonth year;;
 
@@ -302,7 +304,7 @@ let computus_day (year : int) : int =
   let i= c / 4 in
   let k = c mod 4 in
   let l = (32 + 2 * e + 2 * i - h - k) mod 7 in
-  let m = (a + 11 * h + 22 * l) / 45 * l in
+  let m = (a + 11 * h + 22 * l) / 451 in
   let calcday day = (h + l - 7 * m + 114) mod 31 + 1 in
   calcday year;;
 
