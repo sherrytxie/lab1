@@ -163,13 +163,13 @@ let exercise6b : string =
   let greet y = "Hello " ^ y
   in greet "World!";;
 
-let exercise6c : float =
+let exercise6c : float -> float =
   fun x -> x +. 11.1 ;;
 
-let exercise6d : bool =
+let exercise6d : int -> bool =
   fun x -> x < x + 1 ;;
 
-let exercise6e : int =
+let exercise6e : int -> float -> int =
   fun x -> fun y -> x + int_of_float y ;;
 
 
@@ -204,9 +204,9 @@ functions in the lab to get some practice with automated unit testing.
 ......................................................................*)
 
 let square (x : int) : int  =
-  failwith "square not implemented" ;;
+  x * x ;;
 
-let exercise7 = 0 ;;
+let exercise7 = square(5) ;;
 
 (*......................................................................
 Exercise 8: Define a function say_hello that, given a name, creates a
@@ -225,7 +225,9 @@ to the function.
 ......................................................................*)
 
 let say_hello (name : string) : string =
-  failwith "say_hello not implemented";;
+  "Hi " ^ name ^ ". How are you today?";;
+
+let exercise8 = say_hello("Sherry");;
 
 (*......................................................................
 Exercise 9: Define a function, small_bills, that determines, given a
@@ -238,8 +240,9 @@ integers. For this lab, you may assume all prices given are
 non-negative.
 ......................................................................*)
 let small_bills (price : int) : bool =
-  failwith "small_bills not implemented" ;;
+  price mod 20 > 0;;
 
+let exercise9 = small_bills(40);;
 (*......................................................................
 Exercise 10:
 
@@ -265,12 +268,45 @@ that:
   - : int = 1
 
 ......................................................................*)
+let exercise6b : string =
+  let greet y = "Hello " ^ y
+  in greet "World!";;
 
 let computus_month (year : int) : int =
-  failwith "computus_month not implemented" ;;
-let computus_day (year : int) : int =
-  failwith "computus_day not implemented" ;;
+  let a = year mod 19 in
+  let b = year / 100 in
+  let c = year mod 100 in
+  let d = b / 4 in
+  let e = b mod 4 in
+  let f = (b + 8) / 25 in
+  let g = (b - f + 1) / 3 in
+  let h = (19 * a + b - d - g + 15) mod 30 in
+  let i= c / 4 in
+  let k = c mod 4 in
+  let l = (32 + 2 * e + 2 * i - h - k) mod 7 in
+  let m = (a + 11 * h + 22 * l) / 45 * l in
+  let calcmonth month = (h + l - 7 * m + 114) / 31 in
+  calcmonth year;;
 
+let exercise10m = computus_month(2018);;
+
+let computus_day (year : int) : int =
+  let a = year mod 19 in
+  let b = year / 100 in
+  let c = year mod 100 in
+  let d = b / 4 in
+  let e = b mod 4 in
+  let f = (b + 8) / 25 in
+  let g = (b - f + 1) / 3 in
+  let h = (19 * a + b - d - g + 15) mod 30 in
+  let i= c / 4 in
+  let k = c mod 4 in
+  let l = (32 + 2 * e + 2 * i - h - k) mod 7 in
+  let m = (a + 11 * h + 22 * l) / 45 * l in
+  let calcday day = (h + l - 7 * m + 114) mod 31 + 1 in
+  calcday year;;
+
+let exercise10d = computus_day(2018);;
 (*======================================================================
 Part 4: Utilizing recursion
 
@@ -287,9 +323,11 @@ this exercise, you may assume all inputs will be positive.
 
 ......................................................................*)
 
-let factorial (x : int) : int =
-  failwith "factorial not implementated" ;;
+let rec factorial (x : int) : int =
+  if x = 0 then 1
+  else x * factorial (x - 1);;
 
+let exercise11 = factorial(4);;
 (*......................................................................
 Exercise 12: Define a recursive function that sums all the elements
 between 0 and the input.
@@ -306,5 +344,9 @@ the mathematician Carl Freiedrich Gauss as a seven-year-old, *in his
 head*!)
 ......................................................................*)
 
-let sum_from_zero (x : int) : int =
-  failwith "sum_from_zero not implemented" ;;
+let rec sum_from_zero (x : int) : int =
+  if x = 0 then 0
+  else if x > 0 then x + sum_from_zero (x - 1)
+  else x + sum_from_zero(x + 1);;
+
+let exercise12 = sum_from_zero(-3);;
